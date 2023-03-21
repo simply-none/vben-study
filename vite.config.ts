@@ -19,9 +19,16 @@ const __APP_INFO__ = {
   lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
 };
 
+/**
+export declare interface ConfigEnv {
+    command: 'build' | 'serve';
+    mode: string;
+}
+ */
 export default ({ command, mode }: ConfigEnv): UserConfig => {
+  // node进程的工作目录
   const root = process.cwd();
-
+  // 加载环境变量，对象形式：{ string: string }
   const env = loadEnv(mode, root);
 
   // The boolean type read by loadEnv is a string. This function can be converted to boolean type
@@ -82,6 +89,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       reportCompressedSize: false,
       chunkSizeWarningLimit: 2000,
     },
+    // 存放全局变量，可直接获取值
+    // 需要进行类型声明
     define: {
       __APP_INFO__: JSON.stringify(__APP_INFO__),
     },
@@ -89,6 +98,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     css: {
       preprocessorOptions: {
         less: {
+          //
           modifyVars: generateModifyVars(),
           javascriptEnabled: true,
         },
