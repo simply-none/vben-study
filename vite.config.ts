@@ -97,6 +97,21 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
     css: {
       preprocessorOptions: {
+        /**
+         * 
+            不同的预处理器的配置选项可查看对应的插件，比如less：
+            查看less-loader：https://github.com/webpack-contrib/less-loader
+            查看less：https://lesscss.org/usage/#using-less-in-the-browser-modify-variables
+            查看less源码：./node_modules/less/
+            然后合并less-loader下的选项：
+                additionalData：插入的数据
+                sourceMap
+                implementation：node_modules less的导入
+                less options：
+                  javascriptEnabled
+                  depends compress  lint paths color strictImports insecure rootpath rewriteUrls math strictUnits globalVars modifyVars urlArgs
+
+         */
         less: {
           //
           modifyVars: generateModifyVars(),
